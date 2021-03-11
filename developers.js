@@ -9,7 +9,7 @@ const { users }= require('./users_data.js');
 router.get('/',(req,res) => {
     const userList =[];
     Object.keys(users).forEach(id =>{
-        userList.push({id:id, avatar_url:users[id].avatar_url}); //.user.avatar_url
+        userList.push({id:id, avatarUrl:users[id].avatarUrl}); //.user.avatar_url
     })
     res.send(userList);
 
@@ -68,8 +68,8 @@ router.post('/', (req, res) => {
             }
             //adding it all to users
         
-            users[id]={id,avatar_url,name,company,blog,location,email,bio,github_Id,linkedin_Id,codechef_Id,hackerrank_Id,twitter_Id,medium_Id,reposList};
-            // users[id]={id,avatar_url,name,company,blog,location,email,reposList}
+            // users[id]={id,avatarUrl,name,company,blog,location,email,bio,githubId,linkedinId,codechefId,hackerrankId,twitterId,mediumId,reposList};
+            users[id]={id,avatarUrl,name,company,blog,location,email,reposList}
 
             
             //response
