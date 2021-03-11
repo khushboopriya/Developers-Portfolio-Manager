@@ -17,11 +17,11 @@ router.get('/',(req,res) => {
 
 router.post('/', (req, res) => {
     const githubId = req.body.github_id;
-    // const linkedinId = req.body.linkedin_id;
-    // const codechefId = req.body.codechef_id;
-    // const hackerrankId = req.body.hackerrank_id;
-    // const twitterId = req.body.twitter_id;
-    // const mediumId = req.body.medium_id;
+    const linkedinId = req.body.linkedin_id;
+    const codechefId = req.body.codechef_id;
+    const hackerrankId = req.body.hackerrank_id;
+    const twitterId = req.body.twitter_id;
+    const mediumId = req.body.medium_id;
     let id;
     let avatarUrl;
     let name;
@@ -40,8 +40,8 @@ router.post('/', (req, res) => {
     Promise.all([promiseUser, promiseRepos])
         .then((responses) => {
             // console.log(responses[0]);
-            Object.keys(responses[0].data).forEach((key) => {
-                
+    
+                // for user propertiesss
                 id = responses[0].data.login;
                 avatarUrl = responses[0].data.avatar_url;
                 name = responses[0].data.name;
@@ -50,9 +50,8 @@ router.post('/', (req, res) => {
                 location = responses[0].data.location;
                 email = responses[0].data.email;
                 bio = responses[0].data.bio;
-            });//end of then
-
             
+            // for repos 
             for (let i = 0; i < responses[1].data.length; i++) {
                 name = responses[1].data[i].name;
                 htmlUrl = responses[1].data[i].html_url;
@@ -68,8 +67,8 @@ router.post('/', (req, res) => {
             }
             //adding it all to users
         
-            // users[id]={id,avatarUrl,name,company,blog,location,email,bio,githubId,linkedinId,codechefId,hackerrankId,twitterId,mediumId,reposList};
-            users[id]={id,avatarUrl,name,company,blog,location,email,reposList}
+            users[id]={id,avatarUrl,name,company,blog,location,email,bio,githubId,linkedinId,codechefId,hackerrankId,twitterId,mediumId,reposList};
+            
 
             
             //response
@@ -80,11 +79,11 @@ router.post('/', (req, res) => {
 
 
         })//promise end
-        // .catch(() => {
-        //     res.status(404).send({
-        //         error: 'GitHub username is invalid',
-        //     });
-        // });
+        .catch(() => {
+            res.status(404).send({
+                error: 'GitHub username is invalid',
+            });
+        });
 
 });//post ending
 
